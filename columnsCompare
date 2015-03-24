@@ -1,0 +1,15 @@
+package columns.compare;
+
+import java.io.IOException;
+
+/**ColumnsCompare
+ * @author I311648
+ * 2015
+ */
+public class columnsCompare {
+	
+	public static void main(String[] args) throws IOException {
+		
+		OpeningFile.openingFile();
+	}
+}
