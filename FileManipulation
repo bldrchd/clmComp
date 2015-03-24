@@ -1,0 +1,76 @@
+package columns.compare;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+//import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+//import java.util.Scanner;
+
+/**
+ * Making the comparison of two files.
+ *
+ */
+public class FileManipulation {
+	
+	public static String path1 = "C:\\columnsCompareFiles\\col1.txt";	
+	public static String path2 = "C:\\columnsCompareFiles\\col2.txt";	
+	public static String path3 = "C:\\columnsCompareFiles\\results.txt";	
+	public static String path4 = "C:\\columnsCompareFiles\\resultsMatch.txt";
+	private static BufferedWriter bWmatch;	
+	
+	public static void manipulation() throws IOException {
+		
+	//	Scanner sc = new Scanner((path1)); //TODO
+	FileReader FR1 = new FileReader(path1); //reading
+	FileReader FR2 = new FileReader(path2);
+	FileWriter FW = new FileWriter(path3);
+	FileWriter FWmatch = new FileWriter(path4);
+	BufferedReader BR1 = new BufferedReader(FR1); //buffer
+	BufferedReader BR2 = new BufferedReader(FR2);
+	BufferedWriter BW = new BufferedWriter(FW);
+	bWmatch = new BufferedWriter(FWmatch); //a field
+	
+		ArrayList<String> linesOfFirFile = new ArrayList<String>();
+		ArrayList<String> linesOfSecFile = new ArrayList<String>();
+		ArrayList<String> localNotAssigned = new ArrayList<String>();
+		String readedLine = "";
+		String readedLine2 = "";
+		readedLine = BR1.readLine();
+		readedLine2 = BR2.readLine();
+		
+		while ((readedLine = BR1.readLine()) != null) {
+			linesOfFirFile.add(readedLine);
+		}
+		while ((readedLine2 = BR2.readLine()) != null) { 
+			linesOfSecFile.add(readedLine2);
+		}
+		
+		for (int contentCounter1 = 0; contentCounter1 <= linesOfFirFile.size()-1; contentCounter1++) {
+			String temp = (linesOfFirFile.get(contentCounter1));
+
+			for (int contentCounter2 = 0; contentCounter2 < linesOfSecFile.size(); contentCounter2++) {
+				String temp2 = linesOfSecFile.get(contentCounter2);
+
+				if (!(temp.matches(temp2))) {
+					bWmatch.write(temp);
+				   //contentCounter1++;
+				//   continue;
+				}
+				else {
+					String localTemp = temp;
+					localNotAssigned.add(localTemp);
+				//	continue;
+				}
+			}
+			for (int i = 0; i < localNotAssigned.size(); i++) {
+				String lcTmp = localNotAssigned.get(i);
+				BW.write(lcTmp);
+			}
+		}
+		
+		BR1.close(); BR2.close(); BW.close();
+		FR1.close(); FR2.close(); FW.close();
+	}
+}
