@@ -1,0 +1,52 @@
+package columns.compare;
+
+import java.io.File;
+import java.io.IOException;
+/**
+ * Checks if files are existing, executable and readable.
+ *
+ */
+public class OpeningFile {
+	
+	public static boolean openingFile() throws IOException {
+		
+		String path = "C:\\columnsCompareFiles";
+		File fileFirst = new File(path + "\\col1.txt");
+		File fileSecond = new File(path + "\\col2.txt");
+		File file3rd = new File(path + "\\results.txt");
+		
+		//check col1.txt
+		try {
+			if ( fileFirst.canRead() && fileFirst.exists()) {
+				System.out.println("col1 executable and readable");
+			}
+		}
+		catch (Exception e1) {
+			System.out.println("File col1.txt is not readable or does not exist!");
+		}
+		
+		//check col2.txt
+		try {
+			if (fileSecond.canRead() && fileSecond.exists()) {
+				System.out.println("col2 executable and readable");
+			}
+		}
+		catch (Exception e2) {
+			System.out.println("File col2.txt is not readable or does not exist!");
+		}
+		
+		//check results.txt
+		try {
+			if (file3rd.exists()) {
+				System.out.println("results  executable ");
+			}
+		}
+		catch (Exception e2) {
+			System.out.println("File results.txt does not exist!");
+		}
+		
+		//go to manipulation
+		FileManipulation.manipulation();
+		return true;
+	}
+}
